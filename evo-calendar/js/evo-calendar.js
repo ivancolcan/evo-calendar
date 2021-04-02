@@ -932,6 +932,23 @@
             deleteEvent(arr)
         }
     };
+    
+    // v1.1.3 - Remove All Calendar Event(s)
+    EvoCalendar.prototype.removeAllCalendarEvents = function() {
+        var _ = this;
+        
+        if (_.options.calendarEvents !== null && _.options.calendarEvents.length > 0) {
+            _.options.calendarEvents.map(function (event) {
+                // remove to event list
+                _.removeEventList(event.id);
+                // remove event indicator
+                _.removeEventIndicator(event);
+            });
+
+            // Remove events from calendar events
+            _.options.calendarEvents.splice(0, _.options.calendarEvents.length);
+        }
+    };
 
     EvoCalendar.prototype.isValidDate = function(d){
         return new Date(d) && !isNaN(new Date(d).getTime());
